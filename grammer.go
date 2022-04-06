@@ -28,6 +28,7 @@ func main() {
 	master := []string{"S"}
 	rand.Seed(time.Now().UnixNano())
 	running := true
+	skew := 2
 	
 	for running {
 		pass := false
@@ -35,7 +36,7 @@ func main() {
 		fmt.Printf("%v \n", master)
 		for i, m := range master {
 			if m == "S" {
-				if rand.Int() % 2 == 0 {	// mod 2 for even odds 
+				if rand.Int() % skew == 0 {	// mod by skew to adjust the chances of it being true 
 					master[i] = "P"
 				} else {
 					master[i] = "PN"
@@ -45,7 +46,7 @@ func main() {
 				master[i] = P[rand.Int() % len(P)]
 				pass = true
 			} else if m == "N" {
-				if rand.Int() % 2 == 0 {
+				if rand.Int() % skew == 0 {
 					master[i] = "ND"
 				} else {
 					master[i] = "D"
